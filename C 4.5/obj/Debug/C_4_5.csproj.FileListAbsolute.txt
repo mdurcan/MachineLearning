@@ -1,0 +1,21 @@
+C:\Users\Martin\documents\visual studio 2015\Projects\MachineLearning\C 4.5\bin\Debug\C 4.5.exe.config
+C:\Users\Martin\documents\visual studio 2015\Projects\MachineLearning\C 4.5\bin\Debug\C 4.5.exe
+C:\Users\Martin\documents\visual studio 2015\Projects\MachineLearning\C 4.5\bin\Debug\C 4.5.pdb
+C:\Users\Martin\documents\visual studio 2015\Projects\MachineLearning\C 4.5\bin\Debug\Emgu.CV.DebuggerVisualizers.VS2015.dll
+C:\Users\Martin\documents\visual studio 2015\Projects\MachineLearning\C 4.5\bin\Debug\Emgu.CV.UI.dll
+C:\Users\Martin\documents\visual studio 2015\Projects\MachineLearning\C 4.5\bin\Debug\Emgu.CV.UI.GL.dll
+C:\Users\Martin\documents\visual studio 2015\Projects\MachineLearning\C 4.5\bin\Debug\Emgu.CV.World.dll
+C:\Users\Martin\documents\visual studio 2015\Projects\MachineLearning\C 4.5\bin\Debug\nunit.framework.dll
+C:\Users\Martin\documents\visual studio 2015\Projects\MachineLearning\C 4.5\bin\Debug\Microsoft.VisualStudio.DebuggerVisualizers.dll
+C:\Users\Martin\documents\visual studio 2015\Projects\MachineLearning\C 4.5\bin\Debug\ZedGraph.dll
+C:\Users\Martin\documents\visual studio 2015\Projects\MachineLearning\C 4.5\bin\Debug\Emgu.CV.UI.xml
+C:\Users\Martin\documents\visual studio 2015\Projects\MachineLearning\C 4.5\bin\Debug\Emgu.CV.UI.GL.xml
+C:\Users\Martin\documents\visual studio 2015\Projects\MachineLearning\C 4.5\bin\Debug\Emgu.CV.World.xml
+C:\Users\Martin\documents\visual studio 2015\Projects\MachineLearning\C 4.5\bin\Debug\nunit.framework.xml
+C:\Users\Martin\documents\visual studio 2015\Projects\MachineLearning\C 4.5\bin\Debug\Microsoft.VisualStudio.DebuggerVisualizers.xml
+C:\Users\Martin\documents\visual studio 2015\Projects\MachineLearning\C 4.5\obj\Debug\C_4_5.csprojResolveAssemblyReference.cache
+C:\Users\Martin\documents\visual studio 2015\Projects\MachineLearning\C 4.5\obj\Debug\C_4._5.Form1.resources
+C:\Users\Martin\documents\visual studio 2015\Projects\MachineLearning\C 4.5\obj\Debug\C_4_5.Properties.Resources.resources
+C:\Users\Martin\documents\visual studio 2015\Projects\MachineLearning\C 4.5\obj\Debug\C_4_5.csproj.GenerateResource.Cache
+C:\Users\Martin\documents\visual studio 2015\Projects\MachineLearning\C 4.5\obj\Debug\C 4.5.exe
+C:\Users\Martin\documents\visual studio 2015\Projects\MachineLearning\C 4.5\obj\Debug\C 4.5.pdb

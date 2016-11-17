@@ -1,0 +1,7 @@
+C:\Users\Martin\documents\visual studio 2015\Projects\MachineLearning\C 4.5Tests\bin\Debug\C 4.5Tests.dll
+C:\Users\Martin\documents\visual studio 2015\Projects\MachineLearning\C 4.5Tests\bin\Debug\C 4.5Tests.pdb
+C:\Users\Martin\documents\visual studio 2015\Projects\MachineLearning\C 4.5Tests\bin\Debug\C 4.5.exe
+C:\Users\Martin\documents\visual studio 2015\Projects\MachineLearning\C 4.5Tests\bin\Debug\C 4.5.pdb
+C:\Users\Martin\documents\visual studio 2015\Projects\MachineLearning\C 4.5Tests\obj\Debug\C_4_5Tests.csprojResolveAssemblyReference.cache
+C:\Users\Martin\documents\visual studio 2015\Projects\MachineLearning\C 4.5Tests\obj\Debug\C 4.5Tests.dll
+C:\Users\Martin\documents\visual studio 2015\Projects\MachineLearning\C 4.5Tests\obj\Debug\C 4.5Tests.pdb
