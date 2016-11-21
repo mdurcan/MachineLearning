@@ -3,15 +3,17 @@ using System.Collections.Generic;
 
 namespace C_4_5.projectCode
 {
-    class DiscreteAttribute : Attributes
+    public class DiscreteAttribute : IAttributes
     {
         private string Name;
-        private List<DiscreteData> Data;
+        private List<DiscreteData> Data=new List<DiscreteData>();
         //result values
         private string PostiveResult;
         private string NegativeResult;
         //attribute possible values
         private string[] AttributeValues;
+
+        public DiscreteAttribute() { }
 
         public DiscreteAttribute(string name, string postiveResult, string negativeResult, string[] attributeValues)
         {
@@ -32,8 +34,9 @@ namespace C_4_5.projectCode
             Data.Add(data);
         }
 
-        // Getters
         
+        // Getters
+
         public string GetName()
         {
             return Name;
@@ -49,26 +52,39 @@ namespace C_4_5.projectCode
             return AttributeValues;
         }
 
+        public string GetAttributeType()
+        {
+            return "discrete";
+        }
+
         // get information Gain
         public double GetInformationGain(List<int> index)
         {
-            double Gain;
+            double Gain=0.0;
             // get entropy of totaal for the variable with given list
-            Gain = Entropy(GetNumPostiveResults(index), GetNumNegativeResults(index), index.Count);
+            Gain = Entropy(GetNumPostiveResults(index), index.Count)+ Entropy(GetNumPostiveResults(index), index.Count);
 
             // get gain for each attribute
             foreach (string value in AttributeValues)
             {
-                Gain = Gain - ((double)NumberOfEntrysFor(index,value) / index.Count) * Entropy(GetNumPostiveResults(index,value), GetNumNegativeResults(index,value), NumberOfEntrysFor(index, value));
+                Gain = Gain -
+                       (double) NumberOfEntrysFor(index, value)/index.Count*(
+                           Entropy(GetNumPostiveResults(index, value), NumberOfEntrysFor(index, value)) +
+                           Entropy(GetNumNegativeResults(index, value), NumberOfEntrysFor(index, value)));
             }
             return Gain;
         }
         
 
         // get Entropy
-        private double Entropy(int postives, int negatives, int total)
+        private double Entropy(int value, int total)
         {
-            return -((double)postives / total) * (Math.Log((double)postives / total)) - ((double)negatives / total) * (Math.Log((double)negatives / total));
+            if (value == 0)
+            {
+                return 0.0;
+            }
+            double toReturn = -((double)value / total) * (Math.Log((double)value / total));
+            return toReturn;
         }
 
 
@@ -147,7 +163,7 @@ namespace C_4_5.projectCode
         // give list of index for an attribute value
         public List<int> GetAttributeValueList(List<int> index, string value)
         {
-            List<int> listToReturn = null;
+            List<int> listToReturn = new List<int>();
             foreach (int i in index)
             {
                 if (Data[i].GetValue() == value)
@@ -157,5 +173,10 @@ namespace C_4_5.projectCode
             }
             return listToReturn;
         }
+
+        // wont be used
+        public double GetThreshold(){return 0;}
+        public List<int> GetLessThanList(List<int> index, double Threshold){return null;}
+        public List<int> GetGreaterThanList(List<int> index, double Threshold){return null;}
     }
 }

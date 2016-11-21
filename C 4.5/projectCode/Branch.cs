@@ -2,7 +2,7 @@
 
 namespace C_4_5.projectCode
 {
-    class Branch
+    public class Branch
     {
         private string value;
         private Node Child;
@@ -36,5 +36,7 @@ namespace C_4_5.projectCode
         {
             return Index;
         }
+
+        
     }
 }

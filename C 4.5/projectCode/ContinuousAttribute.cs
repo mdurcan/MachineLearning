@@ -5,13 +5,15 @@ using System.Linq;
 namespace C_4_5.projectCode
 {
     // the continouse Attribute 
-    class ContinuousAttribute : Attributes
+    public class ContinuousAttribute : IAttributes
     {
         private string Name;
-        private List<ContinuousData> Data;
+        private List<ContinuousData> Data = new List<ContinuousData>();
         private string PostiveResult;
         private string NegativeResult;
         private double Threshold;
+       
+        public ContinuousAttribute() { }
 
         public ContinuousAttribute(string name,string postiveResult, string negativeResult)
         {
@@ -38,6 +40,11 @@ namespace C_4_5.projectCode
             return Name;
         }
 
+        public string GetAttributeType()
+        {
+            return "continuous";
+        }
+
         public List<ContinuousData> GetAttributesData()
         {
             return Data;
@@ -53,46 +60,49 @@ namespace C_4_5.projectCode
         public double GetInformationGain(List<int> index)
         {
             // intilize Threshold for getting next information gain
-            Threshold=0;
+            Threshold = 0;
             double informationGain = 0;
+            List<ContinuousData> orderedData = null;
 
             // get list of data that will be used to get Informatio Gain
-            List<ContinuousData> dataToSort = null;
+            List<ContinuousData> dataToSort = new List<ContinuousData>();
             foreach (int i in index)
             {
                 dataToSort.Add(Data[i]);
             }
             // order list of Data
-            List<ContinuousData> orderedData = dataToSort.OrderBy(data => data.GetValue()).ToList();
-
+            orderedData = dataToSort.OrderBy(data => data.GetValue()).ToList();
+            
             // get the ordered index to get left and right index
-            List<int> orderedIndex=null;
-            foreach(ContinuousData data in orderedData){
+            List<int> orderedIndex = new List<int>();
+            foreach (ContinuousData data in orderedData)
+            {
                 orderedIndex.Add(data.GetIndex());
             }
-
+            
             // the first result 
             string lastResult = orderedData[0].GetTarget();
 
             // the tresholds to get index of whats on either side of threshold
             int thresholdIndex = 0;
-            
+
             // go through list and caculate treshold at each change
             foreach (ContinuousData data in orderedData)
             {
 
                 // if change of target result, check to see if new threhold found
-                if(data.GetTarget() != lastResult)
+                if (data.GetTarget() != lastResult)
                 {
                     // get left and right index
-                    List<int> leftIndex = null;
-                    List<int> rightIndex = null;
-                    for (int i = 0; i < orderedIndex.Count();i++)
+                    List<int> leftIndex = new List<int>();
+                    List<int> rightIndex = new List<int>();
+                    for (int i = 0; i < orderedIndex.Count(); i++)
                     {
-                        if(i < thresholdIndex)
+                        if (i < thresholdIndex)
                         {
                             leftIndex.Add(orderedIndex[i]);
-                        }else
+                        }
+                        else
                         {
                             rightIndex.Add(orderedIndex[i]);
                         }
@@ -112,9 +122,12 @@ namespace C_4_5.projectCode
                 thresholdIndex++;
             }
 
+
             // return information gain
             return informationGain;
         }
+
+
 
 
         // information gain
@@ -122,16 +135,18 @@ namespace C_4_5.projectCode
         {
             double Gain;
             // get entropy of totaal for the variable with given list
-            Gain = Entropy(GetNumPostiveResults(index), GetNumNegativeResults(index), index.Count);
+            Gain = Entropy(GetNumPostiveResults(index), index.Count)+ Entropy(GetNumNegativeResults(index), index.Count);
 
             //get entropy for left side
-            Gain = Gain - ((double)leftSideIndex.Count/index.Count)*
-                   Entropy(GetNumPostiveResults(leftSideIndex), GetNumNegativeResults(leftSideIndex),
-                       leftSideIndex.Count);
+            Gain = Gain - (double) leftSideIndex.Count/index.Count*(
+                       Entropy(GetNumPostiveResults(leftSideIndex),
+                           leftSideIndex.Count) + Entropy(GetNumNegativeResults(leftSideIndex),
+                           leftSideIndex.Count));
             //get entropy for right side
-            Gain = Gain - ((double)rightSideIndex.Count/index.Count)*
-                   Entropy(GetNumPostiveResults(rightSideIndex), GetNumNegativeResults(rightSideIndex),
-                       rightSideIndex.Count);
+            Gain = Gain - (double) rightSideIndex.Count/index.Count*(
+                       Entropy(GetNumPostiveResults(rightSideIndex),
+                           rightSideIndex.Count) + Entropy(GetNumNegativeResults(rightSideIndex),
+                           rightSideIndex.Count));
 
             // return the gain
             return Gain;
@@ -139,9 +154,13 @@ namespace C_4_5.projectCode
         
 
         // get Entropy
-        private double Entropy(int postives, int negatives, int total)
+        private double Entropy(int value, int total)
         {
-            return -((double)postives /total)*(Math.Log((double)postives /total)) - ((double)negatives /total)*(Math.Log((double)negatives /total));
+            if (value == 0)
+            {
+                return 0.0;
+            }
+            return -((double)value / total) * (Math.Log((double)value / total));
         }
 
         // getting number of Postives
@@ -177,7 +196,7 @@ namespace C_4_5.projectCode
         // give list of index below threshold
         public List<int> GetLessThanList(List<int> index, double threshold)
         {
-            List<int> listToReturn = null;
+            List<int> listToReturn = new List<int>();
             foreach (int i in index)
             {
                 if (Data[i].GetValue() < threshold)
@@ -191,7 +210,7 @@ namespace C_4_5.projectCode
         // give list of index greater than threshold
         public List<int> GetGreaterThanList(List<int> index, double threshold)
         {
-            List<int> listToReturn = null;
+            List<int> listToReturn = new List<int>();
             foreach (int i in index)
             {
                 if (Data[i].GetValue() >= threshold)
@@ -201,5 +220,10 @@ namespace C_4_5.projectCode
             }
             return listToReturn;
         }
+
+        //should not be called
+        public string[] GetAttributeValues(){return null;}
+        public List<int> GetAttributeValueList(List<int> index, string value){return null;}
+        
     }
 }

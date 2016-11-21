@@ -62,7 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="projectCode\Attributes.cs" />
+    <Compile Include="projectCode\IAttributes.cs" />
     <Compile Include="projectCode\Branch.cs" />
     <Compile Include="projectCode\C45Main.cs" />
     <Compile Include="projectCode\Node.cs" />

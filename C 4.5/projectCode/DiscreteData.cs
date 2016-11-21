@@ -1,7 +1,7 @@
 ﻿namespace C_4_5.projectCode
 {
     // This is the data for discrete attributes 
-    class DiscreteData 
+    public class DiscreteData 
     {
         private int Index;
         private  string AttributeValues;

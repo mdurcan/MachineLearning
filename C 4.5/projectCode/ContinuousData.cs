@@ -1,7 +1,7 @@
 ﻿namespace C_4_5.projectCode
 {
     // This is the data for continouse attributes 
-    class ContinuousData 
+    public class ContinuousData 
     {
         private int Index;
         private double AttributeValues;

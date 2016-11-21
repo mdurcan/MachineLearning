@@ -6,53 +6,59 @@ using System.Threading.Tasks;
 
 namespace C_4_5.projectCode
 {
-    class Node
+    public class Node
     {
         //type of node
         private string nodeType;
-        private List<Branch> branchs;
-
-        // variables for continuous attributes
-        private ContinuousAttribute continuousAttribute;
+        private List<Branch> branchs=new List<Branch>();
+        private IAttributes Attribute = new ContinuousAttribute();
         private Branch lessThanBranch;
         private Branch GreaterThanBranch;
         private double Threshold;
-
-        // variables for discrete attributes
-        private DiscreteAttribute discreteAttribute;
+        // the result
+        private string Result;
+        
         
 
         // Construtors
-        // Continous
-        public Node(ContinuousAttribute attribute, List<int> index )
+        public Node(IAttributes attribute, List<int> index )
         {
-            continuousAttribute = attribute;
-            Threshold = attribute.GetThreshold();
+            Attribute = attribute;
 
-            // setting the Branchs
-            lessThanBranch = new Branch("less", continuousAttribute.GetLessThanList(index, Threshold));
-            GreaterThanBranch = new Branch("greater", continuousAttribute.GetGreaterThanList(index, Threshold));
-            // add to branches
-            branchs.Add(lessThanBranch);
-            branchs.Add(GreaterThanBranch);
+            //continuous
+            if (Attribute.GetAttributeType() == "continuous")
+            {
+                Threshold = attribute.GetThreshold();
 
-            // Sets the type of node
-            nodeType = "Continuous";
+                // setting the Branchs
+                lessThanBranch = new Branch("less", Attribute.GetLessThanList(index, Threshold));
+                GreaterThanBranch = new Branch("greater", Attribute.GetGreaterThanList(index, Threshold));
+                // add to branches
+                branchs.Add(lessThanBranch);
+                branchs.Add(GreaterThanBranch);
+
+                // Sets the type of node
+                nodeType = "Continuous";
+            }
+            if (Attribute.GetAttributeType() == "discrete")
+            {
+                
+                //Create branches
+                foreach (string value in Attribute.GetAttributeValues())
+                {
+                    branchs.Add(new Branch(value, Attribute.GetAttributeValueList(index, value)));
+                }
+
+                // sets the type of node
+                nodeType = "Discrete";
+            }
         }
 
-        // Discrete
-        public Node(DiscreteAttribute attribute, List<int> index)
+        // the result node
+        public Node(string result)
         {
-            discreteAttribute = attribute;
-
-            //Create branches
-            foreach (string value in discreteAttribute.GetAttributeValues())
-            {
-                branchs.Add(new Branch(value, discreteAttribute.GetAttributeValueList(index,value)));
-            }
-
-            // sets the type of node
-            nodeType = "Discrete";
+            nodeType = "result";
+            Result = result;
         }
 
         // Getters
@@ -66,27 +72,44 @@ namespace C_4_5.projectCode
             return branchs;
         }
 
-        public string GetAttribute()
+        public string GetAttributeName()
         {
-            string attribute = null;
+            return Attribute.GetName();
+        }
 
-            switch (nodeType)
-            {
-                case "Continuous":
-                    attribute = continuousAttribute.GetName();
-                    break;
-                case "Discrete":
-                    attribute = discreteAttribute.GetName();
-                    break;
-            }
-
-            return attribute;
+        public IAttributes GetAttribute()
+        {
+            return Attribute;
         }
 
         public double GetThreshold()
         {
             return Threshold;
         }
-        
+
+        public string PrintTree(int position)
+        {
+            //prints the result
+            if (nodeType=="result") return Result;
+
+            string toprint = Attribute.GetName();
+            position++;
+            //print each node of each branch
+            foreach (Branch branch in branchs)
+            {
+                //next line
+                toprint = toprint + "\n";
+                // how far it has to tab
+                for (int i = 0; i <= position; i++)
+                {
+                    toprint = toprint + " \t ";
+                }
+                
+                //next node
+                toprint = toprint + branch.GetNode().PrintTree(position);
+            }
+            
+            return toprint;
+        }
     }
 }
